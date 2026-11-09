@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ITRVC Algorithm Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="บทเรียนแบบเห็นภาพ วิชาโครงสร้างข้อมูลและอัลกอริทึม (31900-0005) พร้อมแอนิเมชันทีละขั้นตอน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#home" aria-label="หน้าแรก ITRVC Algorithm Lab">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>ITRVC <span class="brand-long">Algorithm Lab</span> <small>31900-0005</small></span>
+    </a>
+    <nav class="topnav" aria-label="เมนูหลัก">
+      <a href="#home">ภาพรวมรายวิชา</a>
+      <a href="#unit-1">หน่วยที่ 1</a>
+    </nav>
+  </div>
+</header>
+
+<!-- =====================================================
+     หน้าแรก: ภาพรวมและการวิเคราะห์รายวิชา
+     ===================================================== -->
+<main id="home" class="view" data-title="ITRVC Algorithm Lab">
+  <section class="wrap hero">
+    <div>
+      <p class="eyebrow">รหัสวิชา 31900-0005 · หลักสูตร 2567 · รายวิชาส่วนกลาง</p>
+      <h1>โครงสร้างข้อมูล<br>และอัลกอริทึม</h1>
+      <p class="hero-en">Data Structures and Algorithms</p>
+      <p class="lead">บทเรียนที่ให้เห็นการทำงานทีละขั้น ทุกอัลกอริทึมเป็นแอนิเมชันที่กดเล่น หยุด ย้อนกลับ หรือเลื่อนไปขั้นใดก็ได้ และมีคำอธิบายว่าแต่ละขั้นเกิดอะไรขึ้น</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#unit-1">เริ่มเรียนหน่วยที่ 1</a>
+        <a class="btn" href="#units">ดูหน่วยการเรียนทั้งหมด</a>
+      </div>
+      <dl class="facts">
+        <div><dt>หน่วยกิต</dt><dd>3</dd></div>
+        <div><dt>ทฤษฎี</dt><dd>1 ชม./สัปดาห์</dd></div>
+        <div><dt>ปฏิบัติ</dt><dd>4 ชม./สัปดาห์</dd></div>
+        <div><dt>18 สัปดาห์</dt><dd>90 ชม.</dd></div>
+      </dl>
+    </div>
+    <figure class="hero-demo" aria-label="ตัวอย่างแอนิเมชัน Bubble Sort">
+      <div class="sortbars" id="heroBars"></div>
+      <figcaption class="hero-cap mono" id="heroCap">Bubble Sort · เปรียบเทียบทีละคู่ ถ้าตัวซ้ายมากกว่าก็สลับ</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap sec" id="analysis">
+    <div class="sec-h">
+      <p class="eyebrow">ส่วนที่ 1 · วิเคราะห์รายวิชา</p>
+      <h2>จุดประสงค์และสมรรถนะ สอนในหน่วยใดบ้าง</h2>
+      <p>นำจุดประสงค์ สมรรถนะ และคำอธิบายรายวิชามาแยกเป็นประเด็น แล้วจับคู่กับหน่วยการเรียนที่สอนประเด็นนั้น ป้ายสีเขียวคือหน่วยที่เปิดให้เรียนแล้ว</p>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>จุดประสงค์รายวิชา</h3>
+        <ol class="numlist" id="objList"></ol>
+      </div>
+      <div class="panel">
+        <h3>สมรรถนะรายวิชา</h3>
+        <ol class="numlist" id="compList"></ol>
+      </div>
+    </div>
+    <h3 style="margin: 32px 0 12px;">คำอธิบายรายวิชา แยกเป็นหน่วยการเรียน</h3>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>ประเด็นในคำอธิบายรายวิชา</th><th>สอนในหน่วยที่</th></tr></thead>
+        <tbody id="descBody"></tbody>
+      </table>
+    </div>
+    <p class="small muted" style="margin-top: 10px; max-width: 72ch;">หมายเหตุ: คำอธิบายรายวิชาไม่ได้ระบุ Array และ Linked List ไว้ตรง ๆ แต่ทั้งสองเป็นพื้นฐานของ Linear Data Structures และเป็นวิธีที่ใช้สร้าง Stack, Queue, Tree และ Graph จึงจัดไว้เป็นหน่วยที่ 2 และ 3</p>
+  </section>
+
+  <section class="wrap sec" id="units">
+    <div class="sec-h">
+      <p class="eyebrow">ส่วนที่ 2 · หน่วยการเรียนรู้</p>
+      <h2>11 หน่วย ตลอด 18 สัปดาห์</h2>
+      <p>เรียงจากพื้นฐานไปหาการประยุกต์: หลักการ → โครงสร้างเชิงเส้น → โครงสร้างไม่เชิงเส้น → การเรียงและค้นหา → ต้นไม้ตัดสินใจ → โครงงานบูรณาการ</p>
+    </div>
+    <div class="units" id="unitGrid"></div>
+  </section>
+
+  <section class="wrap sec" id="plan">
+    <div class="sec-h">
+      <p class="eyebrow">ส่วนที่ 3 · แผนการสอน</p>
+      <h2>แผนการสอนรายสัปดาห์</h2>
+      <p>สัปดาห์ละ 5 ชั่วโมง (ทฤษฎี 1 + ปฏิบัติ 4) แถวที่ไฮไลต์คือหน่วยที่เปิดให้เรียนแล้ว</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th class="num">สัปดาห์</th><th>หน่วยการเรียน</th><th>หัวข้อ</th><th class="num">ทฤษฎี</th><th class="num">ปฏิบัติ</th></tr></thead>
+        <tbody id="planBody"></tbody>
+        <tfoot id="planFoot"></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <footer class="wrap foot">
+    <span>31900-0005 โครงสร้างข้อมูลและอัลกอริทึม · หลักสูตร 2567</span>
+    <span>ITRVC Algorithm Lab</span>
+  </footer>
+</main>
+
+<!-- =====================================================
+     หน่วยที่ 1
+     ===================================================== -->
+<main id="unit-1" class="view" data-title="หน่วยที่ 1 · ITRVC Algorithm Lab" hidden>
+  <section class="wrap unit-hero">
+    <p class="crumbs"><a href="#home">ภาพรวมรายวิชา</a> / หน่วยที่ 1</p>
+    <p class="eyebrow">หน่วยที่ 1 · สัปดาห์ที่ 1–2</p>
+    <h1>หลักการเบื้องต้นของโครงสร้างข้อมูลและอัลกอริทึม</h1>
+    <p class="lead">โปรแกรมทุกโปรแกรมทำงาน 2 อย่าง คือ<b>เก็บข้อมูล</b>และ<b>ประมวลผลข้อมูล</b> หน่วยนี้ปูพื้นฐานทั้งสองเรื่อง: ข้อมูลถูกเก็บในหน่วยความจำอย่างไร จัดโครงสร้างได้กี่แบบ เขียนขั้นตอนแก้ปัญหาอย่างไร และวัดได้อย่างไรว่าวิธีไหนเร็วกว่า</p>
+    <div class="unit-meta">
+      <span>10 ชั่วโมง</span><span>ทฤษฎี 2 · ปฏิบัติ 8</span><span>6 หัวข้อ · 10 แอนิเมชัน</span><span>ใบงาน 5 · แบบทดสอบ 12 ข้อ</span>
+    </div>
+    <div class="grid-2" style="margin-top: 12px;">
+      <div class="panel">
+        <h3>สมรรถนะประจำหน่วย</h3>
+        <p class="muted">อธิบายหลักการของข้อมูล โครงสร้างข้อมูล และอัลกอริทึม และวิเคราะห์ประสิทธิภาพของอัลกอริทึมเบื้องต้นได้ (สอดคล้องกับสมรรถนะรายวิชาข้อ 1)</p>
+      </div>
+      <div class="panel">
+        <h3>จุดประสงค์เชิงพฤติกรรม</h3>
+        <ol class="numlist small">
+          <li><span>แยกความแตกต่างระหว่างข้อมูลกับสารสนเทศ และเรียงลำดับชั้นของข้อมูลได้</span></li>
+          <li><span>บอกขนาดของชนิดข้อมูลพื้นฐาน และแปลงเลขฐานสิบเป็นฐานสองได้</span></li>
+          <li><span>จำแนกโครงสร้างข้อมูลแบบเชิงเส้นและไม่เชิงเส้นได้</span></li>
+          <li><span>อธิบายแนวคิดข้อมูลแบบนามธรรม (ADT) ได้</span></li>
+          <li><span>เขียนอัลกอริทึมด้วยรหัสเทียมและผังงานได้</span></li>
+          <li><span>วิเคราะห์ Big-O ของอัลกอริทึมอย่างง่ายได้</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <nav class="lessonnav" aria-label="หัวข้อในหน่วยที่ 1">
+    <div class="wrap lessonnav-in">
+      <a href="#u1-1"><b>1.1</b>ข้อมูลและสารสนเทศ</a>
+      <a href="#u1-2"><b>1.2</b>ชนิดข้อมูลและหน่วยความจำ</a>
+      <a href="#u1-3"><b>1.3</b>ประเภทโครงสร้างข้อมูล</a>
+      <a href="#u1-4"><b>1.4</b>ข้อมูลแบบนามธรรม</a>
+      <a href="#u1-5"><b>1.5</b>อัลกอริทึม</a>
+      <a href="#u1-6"><b>1.6</b>Big-O</a>
+      <a href="#u1-lab"><b>✎</b>ใบงาน</a>
+      <a href="#u1-quiz"><b>?</b>แบบทดสอบ</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ---------- 1.1 ---------- -->
+    <section class="lesson" id="u1-1">
+      <div class="lesson-h"><span class="lesson-no">1.1</span><h2>ข้อมูล สารสนเทศ และลำดับชั้นของข้อมูล<span class="en">Data, Information &amp; Data Hierarchy</span></h2></div>
+      <div class="prose">
+        <p>คอมพิวเตอร์รับ<b>ข้อมูล</b>เข้ามา ประมวลผล แล้วส่งออกเป็น<b>สารสนเทศ</b> งานของโปรแกรมเมอร์คือออกแบบว่าจะ<b>เก็บข้อมูลอย่างไร</b> (โครงสร้างข้อมูล) และ<b>ประมวลผลอย่างไร</b> (อัลกอริทึม) ให้ได้สารสนเทศที่ถูกต้องและรวดเร็ว</p>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>ข้อมูล <small>Data</small></dt><dd>ข้อเท็จจริงดิบที่ยังไม่ผ่านการประมวลผล เช่น ตัวเลข ข้อความ ภาพ เสียง</dd></div>
+        <div class="term"><dt>การประมวลผล <small>Processing</small></dt><dd>การคำนวณ เรียงลำดับ เปรียบเทียบ สรุปผล เพื่อให้ข้อมูลมีความหมาย</dd></div>
+        <div class="term"><dt>สารสนเทศ <small>Information</small></dt><dd>ผลลัพธ์จากการประมวลผลที่มีความหมาย ถูกต้อง ทันเวลา และนำไปใช้ตัดสินใจได้</dd></div>
+      </dl>
+
+      <figure class="bench" id="demo-data-info">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.1-ก</span><b>จากคะแนนดิบ สู่การตัดสินใจของครู</b></figcaption>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+
+      <div class="prose" style="margin-top: 26px;">
+        <h3>ลำดับชั้นของข้อมูล (Data Hierarchy)</h3>
+        <p>ข้อมูลในคอมพิวเตอร์ประกอบขึ้นจากหน่วยเล็กไปหาใหญ่ 6 ระดับ ทุกระดับสร้างจากระดับที่เล็กกว่า จนถึงฐานข้อมูลที่เก็บข้อมูลทั้งระบบ</p>
+      </div>
+      <figure class="bench" id="demo-hierarchy">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.1-ข</span><b>ประกอบข้อมูลจากบิตขึ้นไปจนเป็นฐานข้อมูล</b></figcaption>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+
+      <div class="callout"><span class="callout-k">จำไว้</span><p>Niklaus Wirth ผู้สร้างภาษา Pascal ตั้งชื่อหนังสือว่า <b>Algorithms + Data Structures = Programs</b> (1976) โปรแกรมที่ดีจึงต้องเลือกโครงสร้างข้อมูลและอัลกอริทึมให้เหมาะกันเสมอ</p></div>
+      <div class="recap"><h4>สรุปหัวข้อ 1.1</h4><ul>
+        <li>ข้อมูล → ประมวลผล → สารสนเทศ</li>
+        <li>บิต → ไบต์ (8 บิต) → ฟิลด์ → เรคคอร์ด → ไฟล์ → ฐานข้อมูล</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 1.2 ---------- -->
+    <section class="lesson" id="u1-2">
+      <div class="lesson-h"><span class="lesson-no">1.2</span><h2>ชนิดข้อมูลและการจัดเก็บในหน่วยความจำ<span class="en">Data Types &amp; Memory</span></h2></div>
+      <div class="prose">
+        <p>หน่วยความจำหลัก (RAM) แบ่งเป็นช่อง ช่องละ 1 ไบต์ แต่ละช่องมี<b>เลขที่อยู่ (address)</b> ไม่ซ้ำกัน เมื่อประกาศตัวแปร คอมพิวเตอร์จะจองช่องว่างตามขนาดของ<b>ชนิดข้อมูล (Data Type)</b> ชนิดข้อมูลจึงกำหนด 3 อย่าง: ใช้พื้นที่กี่ไบต์ เก็บค่าได้ในช่วงใด และทำการดำเนินการอะไรได้บ้าง</p>
+      </div>
+      <div class="tbl-wrap" style="margin-block: 18px;">
+        <table class="t">
+          <thead><tr><th>ชนิดข้อมูล (C/C++)</th><th>ตัวอย่าง</th><th class="num">ขนาด</th><th>ช่วงค่าโดยประมาณ</th><th>ใน Python</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">char</td><td class="mono">'A'</td><td class="num">1 ไบต์</td><td>−128 ถึง 127 (รหัสอักขระ)</td><td class="mono">str</td></tr>
+            <tr><td class="mono">int</td><td class="mono">17</td><td class="num">4 ไบต์</td><td>−2,147,483,648 ถึง 2,147,483,647</td><td class="mono">int (ขยายขนาดได้ไม่จำกัด)</td></tr>
+            <tr><td class="mono">float</td><td class="mono">3.25</td><td class="num">4 ไบต์</td><td>ทศนิยมแม่นยำราว 7 หลัก</td><td class="mono">—</td></tr>
+            <tr><td class="mono">double</td><td class="mono">3.14159265</td><td class="num">8 ไบต์</td><td>ทศนิยมแม่นยำราว 15 หลัก</td><td class="mono">float</td></tr>
+            <tr><td class="mono">bool</td><td class="mono">true</td><td class="num">1 ไบต์</td><td>true / false</td><td class="mono">bool</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="bench" id="demo-memory">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.2-ก</span><b>ประกาศตัวแปรแล้วเกิดอะไรขึ้นในหน่วยความจำ</b></figcaption>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <p class="small muted" style="max-width: 72ch;">ภาพนี้ย่อให้เข้าใจง่าย: ในเครื่องจริงตัวแปรอาจถูกจัดให้ตรงขอบ (alignment) และเรียงไบต์แบบ little-endian ส่วนใน Python ทุกค่าเป็นอ็อบเจกต์ จึงใช้พื้นที่มากกว่านี้ (ลองใช้ <code>sys.getsizeof()</code> ในใบงาน 1.2) แต่หลักการจองพื้นที่ตามชนิดข้อมูลยังเหมือนเดิม</p>
+
+      <div class="prose" style="margin-top: 26px;">
+        <h3>ทำไมต้องเป็นเลขฐานสอง</h3>
+        <p>วงจรอิเล็กทรอนิกส์แยกสถานะได้ชัดเจน 2 แบบ คือมีไฟกับไม่มีไฟ ค่าทุกอย่างในหน่วยความจำจึงเป็นเลขฐานสอง การแปลงเลขฐานสิบเป็นฐานสองทำได้โดย<b>หารด้วย 2 ซ้ำ ๆ แล้วอ่านเศษจากล่างขึ้นบน</b></p>
+      </div>
+      <figure class="bench" id="demo-binary">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.2-ข</span><b>แปลงเลขฐานสิบเป็นฐานสองด้วยการหารซ้ำ</b></figcaption>
+        <div class="bench-tools">
+          <label for="bin-n">เลขฐานสิบ (0–1023)</label>
+          <input type="number" id="bin-n" min="0" max="1023" value="45">
+          <button class="btn btn-sm" type="button" id="bin-rand">สุ่มตัวเลข</button>
+        </div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <div class="recap"><h4>สรุปหัวข้อ 1.2</h4><ul>
+        <li>หน่วยความจำ 1 ช่อง = 1 ไบต์ มีเลขที่อยู่ประจำช่อง</li>
+        <li>ชนิดข้อมูลกำหนดขนาด ช่วงค่า และการดำเนินการที่ทำได้</li>
+        <li>ฐานสิบ → ฐานสอง: หารด้วย 2 ซ้ำ อ่านเศษจากล่างขึ้นบน</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 1.3 ---------- -->
+    <section class="lesson" id="u1-3">
+      <div class="lesson-h"><span class="lesson-no">1.3</span><h2>ความหมายและประเภทของโครงสร้างข้อมูล<span class="en">Linear &amp; Non-linear Data Structures</span></h2></div>
+      <div class="prose">
+        <p><b>โครงสร้างข้อมูล (Data Structure)</b> คือวิธีจัดเก็บและจัดระเบียบข้อมูลในหน่วยความจำ รวมทั้ง<b>ความสัมพันธ์</b>ระหว่างข้อมูลแต่ละตัว เพื่อให้เพิ่ม ลบ ค้นหา และประมวลผลได้อย่างมีประสิทธิภาพ แบ่งตามลักษณะความสัมพันธ์ได้ดังนี้</p>
+      </div>
+      <div class="ctree" role="img" aria-label="แผนภาพการจำแนกโครงสร้างข้อมูล">
+        <div class="cnode root">โครงสร้างข้อมูล<small>Data Structure</small></div>
+        <div class="ctree-row">
+          <div class="cgroup"><div class="cgroup-h">ชนิดพื้นฐาน <small class="mono muted">Primitive</small></div><div class="cleaf"><span>int</span><span>float</span><span>char</span><span>bool</span></div></div>
+          <div class="cgroup"><div class="cgroup-h">ชนิดไม่พื้นฐาน <small class="mono muted">Non-primitive</small></div>
+            <div class="ctree-row">
+              <div class="cgroup"><div class="cgroup-h">เชิงเส้น · Linear</div><div class="cleaf lin"><span>Array</span><span>Linked List</span><span>Stack</span><span>Queue</span></div></div>
+              <div class="cgroup"><div class="cgroup-h">ไม่เชิงเส้น · Non-linear</div><div class="cleaf non"><span>Tree</span><span>Graph</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>เชิงเส้น <small>Linear</small></dt><dd>ข้อมูลเรียงต่อกันเป็นแถว แต่ละตัวมีตัวก่อนหน้าและตัวถัดไปได้ไม่เกินอย่างละ 1 ตัว ท่องได้ทีละตัวจากต้นถึงปลาย</dd></div>
+        <div class="term"><dt>ไม่เชิงเส้น <small>Non-linear</small></dt><dd>ข้อมูลหนึ่งตัวสัมพันธ์กับข้อมูลได้หลายตัว เป็นลำดับชั้น (ทรี) หรือเครือข่าย (กราฟ)</dd></div>
+      </dl>
+      <figure class="bench" id="demo-structures">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.3</span><b>ข้อมูล 6 ตัวชุดเดิม จัดเป็นโครงสร้างต่างกัน 6 แบบ</b></figcaption>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <h3 style="margin: 26px 0 12px;">เลือกโครงสร้างให้เหมาะกับงาน</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>งาน</th><th>โครงสร้างที่เหมาะ</th><th>เหตุผล</th></tr></thead>
+          <tbody>
+            <tr><td>เก็บคะแนนนักเรียนตามเลขที่ 1–40</td><td class="mono">Array</td><td>จำนวนคงที่ เข้าถึงด้วยเลขที่ได้ทันที</td></tr>
+            <tr><td>เพลย์ลิสต์ที่เพิ่ม/ลบเพลงตรงกลางบ่อย</td><td class="mono">Linked List</td><td>แทรก/ลบได้โดยไม่ต้องเลื่อนข้อมูลทั้งชุด</td></tr>
+            <tr><td>ปุ่ม Undo / ปุ่ม Back</td><td class="mono">Stack</td><td>ยกเลิกสิ่งที่ทำล่าสุดก่อน (LIFO)</td></tr>
+            <tr><td>คิวสั่งพิมพ์งาน</td><td class="mono">Queue</td><td>งานที่ส่งมาก่อนได้พิมพ์ก่อน (FIFO)</td></tr>
+            <tr><td>โฟลเดอร์และไฟล์ในคอมพิวเตอร์</td><td class="mono">Tree</td><td>เป็นลำดับชั้น โฟลเดอร์ซ้อนโฟลเดอร์</td></tr>
+            <tr><td>แผนที่เส้นทางระหว่างอำเภอ</td><td class="mono">Graph</td><td>เชื่อมกันเป็นเครือข่าย มีหลายเส้นทาง</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recap"><h4>สรุปหัวข้อ 1.3</h4><ul>
+        <li>เชิงเส้น: Array, Linked List, Stack, Queue (ความสัมพันธ์หนึ่งต่อหนึ่ง)</li>
+        <li>ไม่เชิงเส้น: Tree (หนึ่งต่อหลาย) และ Graph (หลายต่อหลาย)</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 1.4 ---------- -->
+    <section class="lesson" id="u1-4">
+      <div class="lesson-h"><span class="lesson-no">1.4</span><h2>ข้อมูลแบบนามธรรม<span class="en">Abstract Data Type (ADT)</span></h2></div>
+      <div class="prose">
+        <p><b>ข้อมูลแบบนามธรรม (ADT)</b> คือการนิยามชนิดข้อมูลด้วย<b>สิ่งที่มันทำได้</b> (ข้อมูล + ชุดการดำเนินการ) โดยไม่ระบุ<b>วิธีสร้าง</b>ภายใน เหมือนรีโมตทีวีที่เรากดปุ่มเพิ่มเสียงได้โดยไม่ต้องรู้ว่าวงจรข้างในทำงานอย่างไร</p>
+        <p>ADT แบ่งเป็น 2 ส่วน: <b>ข้อกำหนด (Specification)</b> บอกว่ามีการดำเนินการอะไรและให้ผลอย่างไร และ<b>การสร้าง (Implementation)</b> คือโค้ดจริงที่ทำงานตามข้อกำหนด ADT หนึ่งตัวจึงสร้างได้หลายวิธี</p>
+      </div>
+      <div class="tbl-wrap" style="margin-block: 18px;">
+        <table class="t">
+          <thead><tr><th>ADT: Stack</th><th>ความหมาย</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">push(x)</td><td>เพิ่ม x ไว้บนสุด</td></tr>
+            <tr><td class="mono">pop()</td><td>นำค่าบนสุดออกและคืนค่านั้น (ถ้าว่าง = Underflow)</td></tr>
+            <tr><td class="mono">peek()</td><td>ดูค่าบนสุดโดยไม่นำออก</td></tr>
+            <tr><td class="mono">isEmpty()</td><td>ตรวจว่าว่างหรือไม่</td></tr>
+            <tr><td class="mono">size()</td><td>จำนวนข้อมูลในสแตก</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="bench" id="demo-adt">
+        <figcaption class="bench-h"><span class="eyebrow">กิจกรรม 1.4</span><b>สั่งงาน Stack เดียวกัน แล้วดูว่าภายในทำงานต่างกันอย่างไร</b></figcaption>
+        <div class="stage">
+          <div class="adt">
+            <div class="adt-ops">
+              <label for="adt-val" class="small muted">ค่า</label>
+              <input type="number" id="adt-val" value="25" aria-label="ค่าที่จะ push">
+              <button type="button" class="opbtn primary" data-op="push">push(x)</button>
+              <button type="button" class="opbtn" data-op="pop">pop()</button>
+              <button type="button" class="opbtn" data-op="peek">peek()</button>
+              <button type="button" class="opbtn" data-op="isEmpty">isEmpty()</button>
+              <button type="button" class="opbtn" data-op="size">size()</button>
+              <label class="switch" style="margin-left: auto;"><input type="checkbox" id="adt-show" checked> แสดงการทำงานภายใน</label>
+            </div>
+            <p class="adt-msg" aria-live="polite">ลองกด push / pop แล้วสังเกตว่าผลลัพธ์ที่ผู้ใช้เห็นเหมือนกัน ไม่ว่าภายในจะสร้างด้วยวิธีใด</p>
+            <div class="adt-grid">
+              <div class="adt-box">
+                <h4>สิ่งที่ผู้ใช้เห็น <small>Interface</small></h4>
+                <ul class="adt-log" aria-label="ประวัติการเรียกใช้"></ul>
+              </div>
+              <div class="adt-box">
+                <h4>การสร้างภายใน <small>Implementation</small></h4>
+                <div class="adt-impls">
+                  <div class="adt-impl">
+                    <div class="adt-impl-h"><span>แบบ A: อาร์เรย์ (ขนาด 8 ช่อง)</span><code data-arrtop></code></div>
+                    <div class="arr-row" data-arr></div>
+                  </div>
+                  <div class="adt-impl">
+                    <div class="adt-impl-h"><span>แบบ B: ลิงค์ลิสต์</span><code data-llcount></code></div>
+                    <div class="ll-row" data-ll></div>
+                  </div>
+                  <div class="adt-cover" hidden>ซ่อนรายละเอียดภายใน (Abstraction)<br>ผู้ใช้ไม่จำเป็นต้องรู้ว่าข้างในเป็นแบบใด</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <div class="recap"><h4>สรุปหัวข้อ 1.4</h4><ul>
+        <li>ADT = ข้อมูล + การดำเนินการ โดยซ่อนวิธีสร้างไว้ (Abstraction / Encapsulation)</li>
+        <li>เปลี่ยนวิธีสร้างภายในได้โดยไม่กระทบโค้ดที่เรียกใช้</li>
+        <li>วิธีสร้างแต่ละแบบมีข้อดีข้อเสีย เช่น อาร์เรย์มีขนาดจำกัด ลิงค์ลิสต์ขยายได้แต่ใช้พื้นที่เก็บตัวชี้เพิ่ม</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 1.5 ---------- -->
+    <section class="lesson" id="u1-5">
+      <div class="lesson-h"><span class="lesson-no">1.5</span><h2>อัลกอริทึม รหัสเทียม และผังงาน<span class="en">Algorithms, Pseudocode &amp; Flowcharts</span></h2></div>
+      <div class="prose">
+        <p><b>อัลกอริทึม (Algorithm)</b> คือลำดับขั้นตอนที่ชัดเจนและมีจำนวนจำกัด สำหรับแก้ปัญหาหนึ่ง ๆ ชื่อนี้มาจาก al-Khwārizmī นักคณิตศาสตร์ชาวเปอร์เซียในศตวรรษที่ 9 อัลกอริทึมที่ดีต้องมีคุณสมบัติ 5 ข้อ</p>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>ข้อมูลเข้า <small>Input</small></dt><dd>รับข้อมูลเข้าตั้งแต่ 0 ค่าขึ้นไป</dd></div>
+        <div class="term"><dt>ผลลัพธ์ <small>Output</small></dt><dd>ให้ผลลัพธ์อย่างน้อย 1 ค่า</dd></div>
+        <div class="term"><dt>ความชัดเจน <small>Definiteness</small></dt><dd>ทุกขั้นตอนชัดเจน ตีความได้แบบเดียว</dd></div>
+        <div class="term"><dt>ความจำกัด <small>Finiteness</small></dt><dd>ต้องจบการทำงานภายในจำนวนขั้นตอนที่จำกัด</dd></div>
+        <div class="term"><dt>ทำได้จริง <small>Effectiveness</small></dt><dd>แต่ละขั้นตอนทำได้จริงด้วยการคำนวณพื้นฐาน</dd></div>
+      </dl>
+      <div class="prose">
+        <h3>วิธีเขียนอัลกอริทึม 3 แบบ</h3>
+        <ul>
+          <li><b>ภาษาธรรมชาติ:</b> เขียนเป็นข้อความ เช่น "1. ให้ตัวแรกเป็นค่ามากสุด 2. ไล่ดูตัวถัดไปทีละตัว ถ้ามากกว่าให้จำค่านั้นแทน 3. แสดงค่าที่จำไว้"</li>
+          <li><b>รหัสเทียม (Pseudocode):</b> เขียนคล้ายโค้ดแต่ไม่ยึดไวยากรณ์ภาษาใด แปลงเป็นโปรแกรมได้ง่าย</li>
+          <li><b>ผังงาน (Flowchart):</b> ใช้สัญลักษณ์มาตรฐานและลูกศรแสดงลำดับการทำงาน</li>
+        </ul>
+      </div>
+      <div class="symbols">
+        <div class="sym"><svg viewBox="0 0 96 44" aria-hidden="true"><rect class="s" x="4" y="8" width="88" height="28" rx="14"/></svg><b>เริ่มต้น / จบ</b><span class="muted small">Terminal</span></div>
+        <div class="sym"><svg viewBox="0 0 96 44" aria-hidden="true"><rect class="s" x="8" y="6" width="80" height="32" rx="2"/></svg><b>ประมวลผล</b><span class="muted small">Process</span></div>
+        <div class="sym"><svg viewBox="0 0 96 44" aria-hidden="true"><polygon class="s" points="20,6 92,6 76,38 4,38"/></svg><b>รับ / แสดงผล</b><span class="muted small">Input / Output</span></div>
+        <div class="sym"><svg viewBox="0 0 96 44" aria-hidden="true"><polygon class="s" points="48,3 92,22 48,41 4,22"/></svg><b>ตัดสินใจ</b><span class="muted small">Decision</span></div>
+        <div class="sym"><svg viewBox="0 0 96 44" aria-hidden="true"><path class="a" d="M8 22h76M76 15l9 7-9 7"/></svg><b>ทิศทาง</b><span class="muted small">Flow line</span></div>
+      </div>
+      <div class="prose">
+        <p>ตัวอย่างต่อไปนี้หาค่ามากที่สุดในอาร์เรย์ และใช้โครงสร้างควบคุมครบทั้ง 3 แบบ: <b>ตามลำดับ</b> (กำหนดค่าเริ่มต้น) <b>เลือกทำ</b> (ถ้า A[i] &gt; max) และ<b>ทำซ้ำ</b> (ขณะที่ i &lt; n) ดูให้ครบทั้งอาร์เรย์ ตัวแปร รหัสเทียม และผังงานซึ่งเคลื่อนไปพร้อมกัน</p>
+      </div>
+      <figure class="bench" id="demo-findmax">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.5</span><b>ติดตามการทำงาน (Trace) ของอัลกอริทึมหาค่าสูงสุด</b></figcaption>
+        <div class="bench-tools">
+          <button class="btn btn-sm" type="button" id="fm-rand">สุ่มข้อมูลใหม่</button>
+          <button class="btn btn-sm" type="button" id="fm-worst">ข้อมูลเรียงจากน้อยไปมาก</button>
+        </div>
+        <div class="legend"><span><i class="lg-cur"></i>ตำแหน่ง i</span><span><i class="lg-cmp"></i>กำลังเปรียบเทียบ</span><span><i class="lg-acc"></i>max ปัจจุบัน</span><span><i class="lg-dim"></i>ตรวจแล้ว</span><span><i class="lg-ok"></i>คำตอบ</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <div class="recap"><h4>สรุปหัวข้อ 1.5</h4><ul>
+        <li>อัลกอริทึมต้องมี Input, Output, Definiteness, Finiteness, Effectiveness</li>
+        <li>เขียนได้ 3 แบบ: ภาษาธรรมชาติ รหัสเทียม ผังงาน</li>
+        <li>การ Trace คือการไล่ดูค่าตัวแปรทีละขั้น เป็นวิธีตรวจว่าอัลกอริทึมถูกต้อง</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 1.6 ---------- -->
+    <section class="lesson" id="u1-6">
+      <div class="lesson-h"><span class="lesson-no">1.6</span><h2>การวิเคราะห์ประสิทธิภาพอัลกอริทึม<span class="en">Algorithm Analysis &amp; Big-O Notation</span></h2></div>
+      <div class="prose">
+        <p>ปัญหาเดียวกันแก้ได้หลายวิธี เราจึงต้องวัดว่าวิธีไหนดีกว่า การจับเวลาเป็นวินาทีไม่ยุติธรรม เพราะคอมพิวเตอร์แต่ละเครื่องเร็วไม่เท่ากัน จึงวัดเป็น<b>จำนวนขั้นตอนพื้นฐาน</b>ที่ต้องทำ เมื่อข้อมูลมีขนาด <b>n</b></p>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>ความซับซ้อนด้านเวลา <small>Time Complexity</small></dt><dd>จำนวนขั้นตอนที่อัลกอริทึมต้องทำ เทียบกับขนาดข้อมูล n</dd></div>
+        <div class="term"><dt>ความซับซ้อนด้านพื้นที่ <small>Space Complexity</small></dt><dd>หน่วยความจำเพิ่มเติมที่อัลกอริทึมต้องใช้ เทียบกับขนาดข้อมูล n</dd></div>
+        <div class="term"><dt>กรณีดีสุด / เฉลี่ย / แย่สุด <small>Best / Avg / Worst</small></dt><dd>Linear Search: เจอตัวแรก = 1 ครั้ง (ดีสุด) · อยู่ท้ายสุดหรือไม่มี = n ครั้ง (แย่สุด)</dd></div>
+      </dl>
+      <div class="prose">
+        <h3>สัญกรณ์บิ๊กโอ (Big-O)</h3>
+        <p>Big-O บอก<b>อัตราการเติบโต</b>ของจำนวนขั้นตอนเมื่อ n ใหญ่มาก โดยมักดูกรณีแย่ที่สุด มีกฎย่อ 3 ข้อ</p>
+        <ol>
+          <li><b>ตัดค่าคงที่ทิ้ง:</b> 2n + 5 → O(n)</li>
+          <li><b>เก็บเฉพาะพจน์ที่โตเร็วที่สุด:</b> n² + 3n + 1 → O(n²)</li>
+          <li><b>ลูปต่อกันให้บวก ลูปซ้อนให้คูณ:</b> ลูป n ตามด้วยลูป n = O(n) · ลูป n ซ้อนในลูป n = O(n × n) = O(n²)</li>
+        </ol>
+      </div>
+      <figure class="bench" id="demo-loops">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.6-ก</span><b>นับขั้นตอน: ลูปชั้นเดียวกับลูปซ้อน</b></figcaption>
+        <div class="bench-tools">
+          <label for="loops-n">n =</label>
+          <input type="number" id="loops-n" min="2" max="12" value="6">
+          <span class="small muted">(2–12)</span>
+        </div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <figure class="bench" id="demo-race">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 1.6-ข</span><b>แข่งกันค้นหา: Linear Search กับ Binary Search</b></figcaption>
+        <div class="bench-tools">
+          <label for="race-n">จำนวนข้อมูล</label>
+          <select id="race-n"><option value="16">16</option><option value="32" selected>32</option><option value="64">64</option></select>
+          <label for="race-t">ค้นหาค่า</label>
+          <input type="number" id="race-t" value="50">
+          <button class="btn btn-sm" type="button" id="race-rand">สุ่มค่าที่มีในข้อมูล</button>
+          <button class="btn btn-sm" type="button" id="race-miss">ค่าที่ไม่มีในข้อมูล</button>
+        </div>
+        <div class="legend"><span><i class="lg-cur"></i>กำลังตรวจ</span><span><i class="lg-acc"></i>ช่วงที่ยังต้องค้น</span><span><i class="lg-dim"></i>ตัดทิ้งแล้ว</span><span><i class="lg-ok"></i>พบแล้ว</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <p class="small muted" style="max-width: 72ch;">Binary Search ดูตัวกลาง ถ้าค่าที่หาน้อยกว่าก็ตัดครึ่งขวาทิ้ง ถ้ามากกว่าก็ตัดครึ่งซ้ายทิ้ง ข้อมูลจึงลดลงครึ่งหนึ่งทุกครั้ง แต่ใช้ได้กับ<b>ข้อมูลที่เรียงลำดับแล้ว</b>เท่านั้น (ศึกษาละเอียดในหน่วยที่ 9)</p>
+
+      <figure class="bench" id="demo-growth">
+        <figcaption class="bench-h"><span class="eyebrow">กราฟ 1.6-ค</span><b>อัตราการเติบโตของ Big-O แต่ละแบบ</b></figcaption>
+        <div class="stage">
+          <div class="growth">
+            <div>
+              <div data-chart></div>
+              <div class="gslider" style="margin-top: 10px;">
+                <label for="g-n">เลื่อนค่า n =</label> <b class="mono" id="g-nout">10</b>
+                <input type="range" id="g-n" min="1" max="20" value="10">
+                <button class="btn btn-sm" type="button" id="g-draw">วาดกราฟใหม่</button>
+              </div>
+            </div>
+            <div class="glegend" aria-label="จำนวนขั้นตอนที่ n ปัจจุบัน (กดเพื่อซ่อน/แสดงเส้น)"></div>
+          </div>
+        </div>
+      </figure>
+      <h3 style="margin: 26px 0 6px;">ถ้า n ใหญ่ขึ้นจริง ๆ ต่างกันแค่ไหน</h3>
+      <p class="small muted" style="margin-bottom: 12px;">จำนวนขั้นตอน และเวลาโดยประมาณ (สมมติคอมพิวเตอร์ทำได้ 1 ล้านขั้นตอนต่อวินาที)</p>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Big-O</th><th class="num">n = 10</th><th class="num">n = 100</th><th class="num">n = 1,000</th><th class="num">n = 1,000,000</th></tr></thead>
+          <tbody id="growth-body"></tbody>
+        </table>
+      </div>
+      <h3 style="margin: 26px 0 12px;">Big-O ที่พบบ่อย</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>Big-O</th><th>ชื่อเรียก</th><th>ตัวอย่างอัลกอริทึม</th><th>เรียนในหน่วย</th></tr></thead>
+          <tbody>
+            <tr><td><span class="o-badge cplx-1">O(1)</span></td><td>คงที่</td><td>เข้าถึง A[i], push/pop ของสแตก</td><td>2, 4</td></tr>
+            <tr><td><span class="o-badge cplx-2">O(log n)</span></td><td>ลอการิทึม</td><td>Binary Search, ค้นหาใน BST ที่สมดุล</td><td>6, 9</td></tr>
+            <tr><td><span class="o-badge cplx-3">O(n)</span></td><td>เชิงเส้น</td><td>Linear Search, หาค่าสูงสุด, ท่องลิงค์ลิสต์</td><td>1, 3, 9</td></tr>
+            <tr><td><span class="o-badge cplx-4">O(n log n)</span></td><td>n log n</td><td>Merge Sort, Quick Sort (กรณีเฉลี่ย)</td><td>8</td></tr>
+            <tr><td><span class="o-badge cplx-5">O(n²)</span></td><td>กำลังสอง</td><td>Bubble, Selection, Insertion Sort</td><td>8</td></tr>
+            <tr><td><span class="o-badge cplx-6">O(2ⁿ)</span></td><td>เอกซ์โพเนนเชียล</td><td>ลองทุกชุดคำตอบ, Fibonacci แบบเรียกซ้ำตรง ๆ</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recap"><h4>สรุปหัวข้อ 1.6</h4><ul>
+        <li>วัดประสิทธิภาพเป็นจำนวนขั้นตอนเทียบกับ n ไม่ใช่วินาที</li>
+        <li>Big-O ตัดค่าคงที่ เก็บพจน์ที่โตเร็วที่สุด ลูปซ้อนให้คูณ</li>
+        <li>เร็วไปช้า: O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ)</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- ใบงาน ---------- -->
+    <section class="lesson" id="u1-lab">
+      <div class="lesson-h"><span class="lesson-no">LAB</span><h2>ใบงานปฏิบัติ หน่วยที่ 1<span class="en">ภาษา Python · ปฏิบัติ 8 ชั่วโมง</span></h2></div>
+      <div class="prose" style="margin-bottom: 18px;">
+        <p>ทำใบงานเป็นกลุ่ม 2–3 คน บันทึกผลการรันและตอบคำถามท้ายใบงาน ส่งเป็นไฟล์ <code>.py</code> พร้อมภาพหน้าจอผลลัพธ์</p>
+      </div>
+      <div class="labs">
+        <details class="lab" open>
+          <summary><span class="lab-no">1.1</span><span class="lab-t">เปลี่ยนข้อมูลให้เป็นสารสนเทศ<small>รับคะแนน n คน แล้วสรุปค่าเฉลี่ย สูงสุด ต่ำสุด และจำนวนผู้ผ่าน</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรมแล้วกรอกคะแนน 5 คนจากแอนิเมชัน 1.1-ก ตรวจว่าค่าเฉลี่ยได้ 71.4</li><li>เพิ่มการแสดงชื่อคนที่ได้คะแนนสูงสุด</li><li>คำถาม: ผลลัพธ์บรรทัดใดเป็น "ข้อมูล" บรรทัดใดเป็น "สารสนเทศ"</li></ol>
+            <div class="codeblock"><pre>scores = []
+n = int(input("จำนวนนักเรียน: "))
+for i in range(n):
+    s = float(input(f"คะแนนคนที่ {i + 1}: "))
+    scores.append(s)
+
+avg = sum(scores) / n
+passed = sum(1 for s in scores if s &gt;= 50)
+print("คะแนนเฉลี่ย", round(avg, 2))
+print("คะแนนสูงสุด", max(scores), "ต่ำสุด", min(scores))
+print("ผ่าน", passed, "คน ไม่ผ่าน", n - passed, "คน")</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">1.2</span><span class="lab-t">เลขฐานสองและขนาดของข้อมูล<small>เขียนฟังก์ชันแปลงฐานเอง เทียบกับ bin() และวัดขนาดด้วย sys.getsizeof()</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรม ตรวจว่า <code>to_binary()</code> ให้ผลตรงกับ <code>bin()</code></li><li>บันทึกขนาดของข้อมูลแต่ละชนิดลงตาราง เทียบกับตารางในหัวข้อ 1.2</li><li>คำถาม: ทำไมขนาดใน Python จึงใหญ่กว่าในภาษา C</li></ol>
+            <div class="codeblock"><pre>import sys
+
+def to_binary(n):
+    if n == 0:
+        return "0"
+    bits = ""
+    while n &gt; 0:
+        bits = str(n % 2) + bits   # ต่อเศษไว้ด้านหน้า = อ่านจากล่างขึ้นบน
+        n = n // 2
+    return bits
+
+for x in [5, 13, 45, 255]:
+    print(x, to_binary(x), bin(x))
+
+for v in [17, 3.25, "A", True, [1, 2, 3]]:
+    print(type(v).__name__, sys.getsizeof(v), "bytes")</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">1.3</span><span class="lab-t">สร้าง Stack ADT 2 แบบ<small>อินเทอร์เฟซเดียวกัน สร้างด้วย list และด้วยโหนดเชื่อมโยง</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรม ตรวจว่าทั้งสองคลาสให้ผลลัพธ์เหมือนกัน</li><li>ลองเรียก <code>pop()</code> ตอนสแตกว่าง แล้วบันทึกข้อความผิดพลาด</li><li>คำถาม: ถ้าเปลี่ยนจาก ArrayStack เป็น LinkedStack โค้ดส่วนที่เรียกใช้ต้องแก้หรือไม่ เพราะอะไร</li></ol>
+            <div class="codeblock"><pre>class ArrayStack:
+    def __init__(self):
+        self._data = []
+    def push(self, x):
+        self._data.append(x)
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("Stack Underflow")
+        return self._data.pop()
+    def peek(self):
+        return self._data[-1]
+    def is_empty(self):
+        return len(self._data) == 0
+    def size(self):
+        return len(self._data)
+
+
+class Node:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+
+class LinkedStack:
+    def __init__(self):
+        self._head = None
+        self._n = 0
+    def push(self, x):
+        self._head = Node(x, self._head)
+        self._n += 1
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("Stack Underflow")
+        v = self._head.value
+        self._head = self._head.next
+        self._n -= 1
+        return v
+    def peek(self):
+        return self._head.value
+    def is_empty(self):
+        return self._head is None
+    def size(self):
+        return self._n
+
+
+for s in (ArrayStack(), LinkedStack()):
+    for x in (12, 7, 25):
+        s.push(x)
+    print(type(s).__name__, "pop:", s.pop(), "peek:", s.peek(), "size:", s.size())</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">1.4</span><span class="lab-t">ผังงานและโปรแกรมหาค่าสูงสุด<small>วาดผังงาน เขียนโปรแกรม และนับจำนวนครั้งที่เปรียบเทียบ</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>วาดผังงานหาค่า<b>ต่ำสุด</b>ด้วยมือหรือโปรแกรมวาดผังงาน</li><li>แก้โปรแกรมด้านล่างให้หาค่าต่ำสุด และคืนตำแหน่งของค่านั้นด้วย</li><li>ทดลองกับข้อมูล n = 10, 100, 1000 แล้วบันทึกจำนวนครั้งที่เปรียบเทียบ คำถาม: สัมพันธ์กับ n อย่างไร</li></ol>
+            <div class="codeblock"><pre>def find_max(A):
+    comparisons = 0
+    max_val = A[0]
+    for i in range(1, len(A)):
+        comparisons += 1
+        if A[i] &gt; max_val:
+            max_val = A[i]
+    return max_val, comparisons
+
+print(find_max([23, 41, 15, 58, 37, 62, 29]))   # (62, 6)</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">1.5</span><span class="lab-t">ทดลองจับเวลา O(n) กับ O(log n)<small>วัดเวลาจริงของ Linear Search และ Binary Search เมื่อ n โตขึ้น</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรมแล้วบันทึกเวลาลงตาราง</li><li>สร้างกราฟเส้นเปรียบเทียบเวลาทั้งสองวิธี (ใช้ Excel หรือ Google Sheets)</li><li>คำถาม: เมื่อ n เพิ่มขึ้น 10 เท่า เวลาของแต่ละวิธีเพิ่มขึ้นประมาณกี่เท่า สอดคล้องกับ Big-O หรือไม่</li></ol>
+            <div class="codeblock"><pre>import time
+
+def linear_search(A, x):
+    for i, v in enumerate(A):
+        if v == x:
+            return i
+    return -1
+
+def binary_search(A, x):
+    lo, hi = 0, len(A) - 1
+    while lo &lt;= hi:
+        mid = (lo + hi) // 2
+        if A[mid] == x:
+            return mid
+        if A[mid] &lt; x:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return -1
+
+for n in [1_000, 10_000, 100_000, 1_000_000]:
+    A = list(range(n))
+    x = n - 1                     # กรณีแย่ที่สุดของ linear search
+    t0 = time.perf_counter(); linear_search(A, x)
+    t1 = time.perf_counter(); binary_search(A, x)
+    t2 = time.perf_counter()
+    print(f"n={n:&gt;9,}  linear={(t1 - t0) * 1000:9.3f} ms  binary={(t2 - t1) * 1000:8.4f} ms")</pre></div>
+          </div>
+        </details>
+      </div>
+      <h3 style="margin: 26px 0 12px;">เกณฑ์การประเมินใบงาน</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>ประเด็น</th><th class="num">คะแนน</th><th>สิ่งที่ดู</th></tr></thead>
+          <tbody>
+            <tr><td>ความถูกต้องของโปรแกรม</td><td class="num">40</td><td>รันได้ ผลลัพธ์ถูกต้องตามที่ใบงานกำหนด</td></tr>
+            <tr><td>การออกแบบอัลกอริทึม</td><td class="num">20</td><td>ผังงาน/รหัสเทียมสอดคล้องกับโค้ด</td></tr>
+            <tr><td>การบันทึกและวิเคราะห์ผล</td><td class="num">20</td><td>ตารางผล คำตอบท้ายใบงาน การอธิบายด้วย Big-O</td></tr>
+            <tr><td>กิจนิสัย</td><td class="num">20</td><td>ความรับผิดชอบ ส่งตรงเวลา การทำงานเป็นทีม การสื่อสาร</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------- แบบทดสอบ ---------- -->
+    <section class="lesson" id="u1-quiz">
+      <div class="lesson-h"><span class="lesson-no">QUIZ</span><h2>แบบทดสอบท้ายหน่วยที่ 1<span class="en">12 ข้อ · ตอบแล้วเห็นเฉลยทันที · เกณฑ์ผ่าน 70%</span></h2></div>
+      <div id="quiz-u1"></div>
+      <div class="next-unit">
+        <div><p class="eyebrow">หน่วยถัดไป</p><h3>หน่วยที่ 2 อาร์เรย์และเรคคอร์ด</h3><p class="small muted">กำลังจัดทำ · สัปดาห์ที่ 3–4</p></div>
+        <a class="btn" href="#units">ดูหน่วยการเรียนทั้งหมด</a>
+      </div>
+    </section>
+
+  </div>
+  <footer class="wrap foot">
+    <span>หน่วยที่ 1 · 31900-0005 โครงสร้างข้อมูลและอัลกอริทึม</span>
+    <a href="#home">กลับหน้าภาพรวมรายวิชา</a>
+  </footer>
+</main>
+
+<script src="js/core.js"></script>
+<script src="js/course-data.js"></script>
+<script src="js/home.js"></script>
+<script src="js/unit1.js"></script>
+<script>DSA.initCopy(); DSA.initRouter();</script>
+</body>
+</html>
