@@ -55,7 +55,7 @@ const COURSE = {
       ],
     },
     {
-      no: 2, weeks: [2], theory: 1, practice: 4, comp: [1, 2],
+      no: 2, ready: true, weeks: [2], theory: 1, practice: 4, comp: [1, 2],
       title: 'อาร์เรย์และเรคคอร์ด', en: 'Arrays & Records',
       topics: [
         'ADT ของลิสต์ และการสร้างด้วยอาร์เรย์',

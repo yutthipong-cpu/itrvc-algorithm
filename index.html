@@ -20,8 +20,9 @@
       <span>ITRVC <span class="brand-long">Algorithm Lab</span> <small>31900-0005</small></span>
     </a>
     <nav class="topnav" aria-label="เมนูหลัก">
-      <a href="#home">ภาพรวมรายวิชา</a>
+      <a href="#home">ภาพรวม</a>
       <a href="#unit-1">หน่วยที่ 1</a>
+      <a href="#unit-2">หน่วยที่ 2</a>
     </nav>
   </div>
 </header>
@@ -656,8 +657,8 @@ for n in [1_000, 10_000, 100_000, 1_000_000]:
       <div class="lesson-h"><span class="lesson-no">QUIZ</span><h2>แบบทดสอบท้ายหน่วยที่ 1<span class="en">12 ข้อ · ตอบแล้วเห็นเฉลยทันที · เกณฑ์ผ่าน 70%</span></h2></div>
       <div id="quiz-u1"></div>
       <div class="next-unit">
-        <div><p class="eyebrow">หน่วยถัดไป</p><h3>หน่วยที่ 2 อาร์เรย์และเรคคอร์ด</h3><p class="small muted">กำลังจัดทำ · สัปดาห์ที่ 2</p></div>
-        <a class="btn" href="#units">ดูหน่วยการเรียนทั้งหมด</a>
+        <div><p class="eyebrow">หน่วยถัดไป</p><h3>หน่วยที่ 2 อาร์เรย์และเรคคอร์ด</h3><p class="small muted">สัปดาห์ที่ 2 · 5 หัวข้อ · 5 แอนิเมชัน</p></div>
+        <a class="btn btn-primary" href="#unit-2">เริ่มเรียนหน่วยที่ 2</a>
       </div>
     </section>
 
@@ -668,10 +669,453 @@ for n in [1_000, 10_000, 100_000, 1_000_000]:
   </footer>
 </main>
 
+<!-- =====================================================
+     หน่วยที่ 2
+     ===================================================== -->
+<main id="unit-2" class="view" data-title="หน่วยที่ 2 · ITRVC Algorithm Lab" hidden>
+  <section class="wrap unit-hero">
+    <p class="crumbs"><a href="#home">ภาพรวมรายวิชา</a> / หน่วยที่ 2</p>
+    <p class="eyebrow">หน่วยที่ 2 · สัปดาห์ที่ 2</p>
+    <h1>อาร์เรย์และเรคคอร์ด</h1>
+    <p class="lead">อาร์เรย์คือโครงสร้างข้อมูลที่พื้นฐานที่สุดและเร็วที่สุดในการเข้าถึง เพราะคอมพิวเตอร์<b>คำนวณ</b>ตำแหน่งของข้อมูลได้ทันทีโดยไม่ต้องค้นหา หน่วยนี้จะดูว่าการคำนวณนั้นทำอย่างไร ทั้งอาร์เรย์ 1 มิติ 2 มิติ และอาร์เรย์ของเรคคอร์ด รวมทั้งราคาที่ต้องจ่ายเมื่อแทรกหรือลบข้อมูล</p>
+    <div class="unit-meta">
+      <span>5 ชั่วโมง</span><span>ทฤษฎี 1 · ปฏิบัติ 4</span><span>5 หัวข้อ · 5 แอนิเมชัน</span><span>ใบงาน 4 · แบบทดสอบ 11 ข้อ</span>
+    </div>
+    <div class="grid-2" style="margin-top: 12px;">
+      <div class="panel">
+        <h3>สมรรถนะประจำหน่วย</h3>
+        <p class="muted">สร้างและจัดการข้อมูลด้วยอาร์เรย์และเรคคอร์ด คำนวณตำแหน่งของข้อมูลในหน่วยความจำ และบอกประสิทธิภาพของการดำเนินการแต่ละแบบได้ (สอดคล้องกับสมรรถนะรายวิชาข้อ 1 และ 2)</p>
+      </div>
+      <div class="panel">
+        <h3>จุดประสงค์เชิงพฤติกรรม</h3>
+        <ol class="numlist small">
+          <li><span>อธิบาย ADT ของลิสต์และคุณสมบัติของอาร์เรย์ได้</span></li>
+          <li><span>คำนวณตำแหน่งของสมาชิกอาร์เรย์ 1 มิติได้</span></li>
+          <li><span>คำนวณตำแหน่งของสมาชิกอาร์เรย์ 2 มิติแบบ Row-major และ Column-major ได้</span></li>
+          <li><span>เขียนโปรแกรมแทรก ลบ และค้นหาข้อมูลในอาร์เรย์ และบอก Big-O ได้</span></li>
+          <li><span>สร้างและใช้งานเรคคอร์ดและอาร์เรย์ของเรคคอร์ดได้</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <nav class="lessonnav" aria-label="หัวข้อในหน่วยที่ 2">
+    <div class="wrap lessonnav-in">
+      <a href="#u2-1"><b>2.1</b>ลิสต์และอาร์เรย์</a>
+      <a href="#u2-2"><b>2.2</b>อาร์เรย์ 1 มิติ</a>
+      <a href="#u2-3"><b>2.3</b>อาร์เรย์ 2 มิติ</a>
+      <a href="#u2-4"><b>2.4</b>แทรก ลบ ค้นหา</a>
+      <a href="#u2-5"><b>2.5</b>เรคคอร์ด</a>
+      <a href="#u2-lab"><b>✎</b>ใบงาน</a>
+      <a href="#u2-quiz"><b>?</b>แบบทดสอบ</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- ---------- 2.1 ---------- -->
+    <section class="lesson" id="u2-1">
+      <div class="lesson-h"><span class="lesson-no">2.1</span><h2>ADT ของลิสต์ และการสร้างด้วยอาร์เรย์<span class="en">List ADT &amp; Arrays</span></h2></div>
+      <div class="prose">
+        <p><b>ลิสต์ (List)</b> คือข้อมูลที่เรียงเป็นลำดับ แต่ละตัวมีตำแหน่งของตัวเอง เช่น รายชื่อนักเรียน รายการสินค้าในตะกร้า ADT ของลิสต์กำหนดการดำเนินการไว้ดังนี้ โดยยังไม่บอกว่าจะสร้างด้วยอะไร</p>
+      </div>
+      <div class="tbl-wrap" style="margin-block: 18px;">
+        <table class="t">
+          <thead><tr><th>ADT: List</th><th>ความหมาย</th><th>ใน Python</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">get(i)</td><td>อ่านค่าที่ตำแหน่ง i</td><td class="mono">A[i]</td></tr>
+            <tr><td class="mono">set(i, x)</td><td>เปลี่ยนค่าที่ตำแหน่ง i เป็น x</td><td class="mono">A[i] = x</td></tr>
+            <tr><td class="mono">insert(i, x)</td><td>แทรก x ที่ตำแหน่ง i</td><td class="mono">A.insert(i, x)</td></tr>
+            <tr><td class="mono">delete(i)</td><td>ลบข้อมูลที่ตำแหน่ง i</td><td class="mono">del A[i]</td></tr>
+            <tr><td class="mono">find(x)</td><td>หาตำแหน่งของ x</td><td class="mono">A.index(x)</td></tr>
+            <tr><td class="mono">size()</td><td>จำนวนข้อมูล</td><td class="mono">len(A)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>วิธีสร้างลิสต์ที่นิยมที่สุดคือ<b>อาร์เรย์ (Array)</b> ซึ่งมีคุณสมบัติ 4 ข้อ</p>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>ชนิดเดียวกัน <small>Homogeneous</small></dt><dd>ทุกช่องเก็บข้อมูลชนิดเดียวกัน จึงมีขนาดเท่ากันทุกช่อง</dd></div>
+        <div class="term"><dt>อยู่ติดกัน <small>Contiguous</small></dt><dd>ทุกช่องเรียงต่อกันในหน่วยความจำ ไม่มีช่องว่างคั่น</dd></div>
+        <div class="term"><dt>ขนาดคงที่ <small>Fixed size</small></dt><dd>ต้องกำหนดจำนวนช่องตอนสร้าง เพิ่มช่องภายหลังไม่ได้</dd></div>
+        <div class="term"><dt>เข้าถึงโดยตรง <small>Random access</small></dt><dd>ไปที่ช่องใดก็ได้ทันทีด้วยดัชนี ไม่ต้องไล่จากช่องแรก</dd></div>
+      </dl>
+      <div class="prose">
+        <p>แล้ว list ของ Python ที่เพิ่มข้อมูลได้เรื่อย ๆ ทำได้อย่างไร คำตอบคือมันเป็น<b>อาร์เรย์แบบขยายได้ (Dynamic Array)</b> ที่จองช่องสำรองไว้ล่วงหน้า และเมื่อเต็มจะจองอาร์เรย์ใหม่ที่ใหญ่กว่าแล้วคัดลอกข้อมูลไป</p>
+      </div>
+      <figure class="bench" id="demo-dynamic">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 2.1</span><b>เมื่ออาร์เรย์เต็ม: จองใหม่ 2 เท่า แล้วคัดลอก</b></figcaption>
+        <div class="legend"><span><i class="lg-cur"></i>วาง/คัดลอกลงช่องนี้</span><span><i class="lg-cmp"></i>กำลังคัดลอกจากช่องนี้</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <div class="recap"><h4>สรุปหัวข้อ 2.1</h4><ul>
+        <li>List ADT: get, set, insert, delete, find, size</li>
+        <li>อาร์เรย์: ชนิดเดียวกัน อยู่ติดกัน ขนาดคงที่ เข้าถึงโดยตรง</li>
+        <li>list ของ Python เป็น dynamic array ขยายทีละ 2 เท่า (โดยประมาณ) ทำให้ append เป็น O(1) แบบเฉลี่ย</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 2.2 ---------- -->
+    <section class="lesson" id="u2-2">
+      <div class="lesson-h"><span class="lesson-no">2.2</span><h2>อาร์เรย์ 1 มิติ และการคำนวณตำแหน่ง<span class="en">One-dimensional Arrays &amp; Address Calculation</span></h2></div>
+      <div class="tbl-wrap" style="margin-block: 6px 18px;">
+        <table class="t">
+          <thead><tr><th>การทำงาน</th><th>ภาษา C</th><th>Python</th></tr></thead>
+          <tbody>
+            <tr><td>ประกาศอาร์เรย์ 6 ช่อง</td><td class="mono">int A[6];</td><td class="mono">A = [0] * 6</td></tr>
+            <tr><td>กำหนดค่าเริ่มต้น</td><td class="mono">int A[6] = {15, 42, 7, 23, 56, 31};</td><td class="mono">A = [15, 42, 7, 23, 56, 31]</td></tr>
+            <tr><td>อ่าน / เขียนช่องที่ 3</td><td class="mono">x = A[3];  A[3] = 99;</td><td class="mono">x = A[3];  A[3] = 99</td></tr>
+            <tr><td>วนทุกช่อง</td><td class="mono">for (i = 0; i &lt; 6; i++) ...</td><td class="mono">for x in A: ...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>เพราะทุกช่องมีขนาดเท่ากันและอยู่ติดกัน ตำแหน่งของช่องใด ๆ จึงคำนวณได้จาก<b>ที่อยู่ของช่องแรก</b>บวกกับ<b>ระยะที่ต้องข้ามไป</b></p>
+      </div>
+      <div class="callout" style="margin-block: 14px;"><span class="callout-k">สูตร</span><p class="mono"><b>Loc(A[i]) = Base + (i − L) × w</b><br><span class="small" style="font-family: var(--f-body);">Base = ที่อยู่ของช่องแรก · L = ดัชนีแรก (ภาษา C/Python = 0) · w = ขนาดของข้อมูล 1 ช่อง (ไบต์)</span></p></div>
+      <figure class="bench" id="demo-addr1d">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 2.2</span><b>หาที่อยู่ของ A[i] ด้วยการคำนวณครั้งเดียว</b></figcaption>
+        <div class="bench-tools">
+          <label for="a1-type">ชนิดข้อมูล</label>
+          <select id="a1-type" style="width: 10.5em;"><option value="char">char (1 ไบต์)</option><option value="int" selected>int (4 ไบต์)</option><option value="double">double (8 ไบต์)</option></select>
+          <label for="a1-low">ดัชนีแรก L</label>
+          <select id="a1-low"><option value="0" selected>0</option><option value="1">1</option></select>
+          <label for="a1-i">ต้องการ A[i] เมื่อ i =</label>
+          <input type="number" id="a1-i" min="0" max="5" value="3">
+        </div>
+        <div class="legend"><span><i class="lg-acc"></i>Base (ช่องแรก)</span><span><i class="lg-dim"></i>ช่องที่ข้ามไป</span><span><i class="lg-ok"></i>ช่องที่ต้องการ</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <div class="recap"><h4>สรุปหัวข้อ 2.2</h4><ul>
+        <li>Loc(A[i]) = Base + (i − L) × w</li>
+        <li>ดัชนีเริ่มที่ 0 ทำให้สูตรง่ายที่สุด: Base + i × w (นี่คือเหตุผลที่ภาษา C และ Python เริ่มที่ 0)</li>
+        <li>การเข้าถึง A[i] ใช้การคำนวณครั้งเดียวเสมอ จึงเป็น O(1)</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 2.3 ---------- -->
+    <section class="lesson" id="u2-3">
+      <div class="lesson-h"><span class="lesson-no">2.3</span><h2>อาร์เรย์ 2 มิติ: Row-major และ Column-major<span class="en">Two-dimensional Arrays</span></h2></div>
+      <div class="prose">
+        <p>อาร์เรย์ 2 มิติดูเหมือนตาราง M แถว × N คอลัมน์ เช่น คะแนนนักเรียน (แถว) แยกตามวิชา (คอลัมน์) แต่หน่วยความจำเป็นแถวยาวแถวเดียว จึงต้องเลือกวิธีเรียงช่องของตารางลงไป มี 2 แบบ</p>
+      </div>
+      <dl class="cols">
+        <div class="term"><dt>Row-major <small>เรียงทีละแถว</small></dt><dd>เก็บแถว 0 ครบทุกคอลัมน์ แล้วจึงแถว 1, 2, ... ใช้ใน C, C++, Python, Java<br><code>Base + (i × N + j) × w</code></dd></div>
+        <div class="term"><dt>Column-major <small>เรียงทีละคอลัมน์</small></dt><dd>เก็บคอลัมน์ 0 ครบทุกแถว แล้วจึงคอลัมน์ 1, 2, ... ใช้ใน Fortran, MATLAB, R<br><code>Base + (j × M + i) × w</code></dd></div>
+      </dl>
+      <figure class="bench" id="demo-addr2d">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 2.3</span><b>วางตารางลงหน่วยความจำ แล้วคำนวณตำแหน่ง A[i][j]</b></figcaption>
+        <div class="bench-tools">
+          <label for="a2-order">วิธีเรียง</label>
+          <select id="a2-order" style="width: 11em;"><option value="row" selected>Row-major</option><option value="col">Column-major</option></select>
+          <label for="a2-i">i (แถว)</label>
+          <select id="a2-i"><option>0</option><option>1</option><option selected>2</option></select>
+          <label for="a2-j">j (คอลัมน์)</label>
+          <select id="a2-j"><option>0</option><option selected>1</option><option>2</option><option>3</option></select>
+        </div>
+        <div class="legend"><span><i class="lg-cur"></i>กำลังวาง</span><span><i class="lg-acc"></i>วางแล้ว</span><span><i class="lg-dim"></i>ช่องที่ข้ามไป</span><span><i class="lg-ok"></i>ช่องที่ต้องการ</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <div class="callout"><span class="callout-k">ระวัง</span><p>ใน Python ถ้าสร้างตารางด้วย <code>M = [[0] * 4] * 3</code> ทั้ง 3 แถวจะเป็น<b>ลิสต์ตัวเดียวกัน</b> แก้แถวหนึ่งแล้วแถวอื่นเปลี่ยนตาม ให้ใช้ <code>M = [[0] * 4 for _ in range(3)]</code> แทน</p></div>
+      <div class="recap"><h4>สรุปหัวข้อ 2.3</h4><ul>
+        <li>Row-major: Base + (i × N + j) × w (N = จำนวนคอลัมน์)</li>
+        <li>Column-major: Base + (j × M + i) × w (M = จำนวนแถว)</li>
+        <li>วนลูปให้ตรงกับวิธีเรียง (Row-major วนแถวนอก คอลัมน์ใน) จะอ่านหน่วยความจำต่อเนื่อง ทำงานเร็วกว่า</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 2.4 ---------- -->
+    <section class="lesson" id="u2-4">
+      <div class="lesson-h"><span class="lesson-no">2.4</span><h2>การแทรก ลบ และค้นหาในอาร์เรย์<span class="en">Insertion, Deletion &amp; Search</span></h2></div>
+      <div class="prose">
+        <p>อาร์เรย์อ่านค่าได้เร็วมาก แต่เพราะทุกช่องต้องอยู่ติดกัน การแทรกหรือลบตรงกลางจึงต้อง<b>เลื่อนข้อมูล</b>ที่อยู่ถัดไปทั้งหมด ยิ่งแทรกใกล้ต้นอาร์เรย์ ยิ่งต้องเลื่อนมาก</p>
+      </div>
+      <figure class="bench" id="demo-ops">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 2.4</span><b>เลื่อนข้อมูลเมื่อแทรก ลบ และไล่ค้นหา</b></figcaption>
+        <div class="bench-tools">
+          <label for="a3-op">คำสั่ง</label>
+          <select id="a3-op" style="width: 11.5em;"><option value="insert" selected>แทรก (insert)</option><option value="delete">ลบ (delete)</option><option value="search">ค้นหา (search)</option></select>
+          <label for="a3-k">ตำแหน่ง k</label>
+          <input type="number" id="a3-k" min="0" max="5" value="1"><span class="small muted" data-range></span>
+          <label for="a3-x">ค่า x</label>
+          <input type="number" id="a3-x" value="15">
+          <button class="btn btn-sm btn-primary" type="button" id="a3-run">สั่งงาน</button>
+          <button class="btn btn-sm" type="button" id="a3-reset">รีเซ็ตข้อมูล</button>
+        </div>
+        <p class="small muted" style="padding: 8px 20px 0;">เล่นจนจบแล้ว ผลลัพธ์จะเป็นข้อมูลตั้งต้นของคำสั่งถัดไป ลองแทรกที่ k = 0 เทียบกับ k = n</p>
+        <div class="legend"><span><i class="lg-cmp"></i>เลื่อนจาก / เปรียบเทียบ</span><span><i class="lg-cur"></i>เลื่อนไป / วาง</span><span><i class="lg-ok"></i>ผลลัพธ์</span></div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <h3 style="margin: 26px 0 12px;">สรุปประสิทธิภาพของอาร์เรย์</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>การดำเนินการ</th><th>งานที่ต้องทำ (กรณีแย่สุด)</th><th>Big-O</th></tr></thead>
+          <tbody>
+            <tr><td>อ่าน/เขียน A[i]</td><td>คำนวณที่อยู่ 1 ครั้ง</td><td><span class="o-badge cplx-1">O(1)</span></td></tr>
+            <tr><td>เพิ่มท้ายสุด (ยังไม่เต็ม)</td><td>วางลงช่อง n ไม่ต้องเลื่อน</td><td><span class="o-badge cplx-1">O(1)</span></td></tr>
+            <tr><td>แทรกที่ตำแหน่ง k</td><td>เลื่อน n − k ตัวไปทางขวา</td><td><span class="o-badge cplx-3">O(n)</span></td></tr>
+            <tr><td>ลบที่ตำแหน่ง k</td><td>เลื่อน n − k − 1 ตัวไปทางซ้าย</td><td><span class="o-badge cplx-3">O(n)</span></td></tr>
+            <tr><td>ลบตัวท้ายสุด</td><td>ลดค่า n ลง 1</td><td><span class="o-badge cplx-1">O(1)</span></td></tr>
+            <tr><td>ค้นหาค่า (ข้อมูลไม่เรียง)</td><td>เปรียบเทียบครบ n ตัว</td><td><span class="o-badge cplx-3">O(n)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="recap"><h4>สรุปหัวข้อ 2.4</h4><ul>
+        <li>แทรก/ลบตรงกลางต้องเลื่อนข้อมูล จึงเป็น O(n)</li>
+        <li>ถ้างานต้องแทรก/ลบตรงกลางบ่อย ลิงค์ลิสต์ (หน่วยที่ 3) จะเหมาะกว่า</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- 2.5 ---------- -->
+    <section class="lesson" id="u2-5">
+      <div class="lesson-h"><span class="lesson-no">2.5</span><h2>เรคคอร์ดและอาร์เรย์ของเรคคอร์ด<span class="en">Records / Structures</span></h2></div>
+      <div class="prose">
+        <p><b>เรคคอร์ด (Record)</b> คือกลุ่มของข้อมูลที่เกี่ยวข้องกันแต่<b>ต่างชนิดกัน</b> รวมไว้เป็นหน่วยเดียว แต่ละส่วนเรียกว่า<b>ฟิลด์ (Field)</b> และเข้าถึงด้วยชื่อฟิลด์ เช่น <code>s.gpa</code> ส่วนอาร์เรย์เก็บข้อมูลชนิดเดียวกันและเข้าถึงด้วยดัชนี</p>
+      </div>
+      <div class="cols">
+        <div class="codeblock"><pre>// ภาษา C
+struct Student {
+    int   id;        // 4 ไบต์
+    char  name[12];  // 12 ไบต์
+    float gpa;       // 4 ไบต์
+};
+struct Student s = {66003, "Chai", 3.45};
+printf("%.2f", s.gpa);</pre></div>
+        <div class="codeblock"><pre># Python: dataclass
+from dataclasses import dataclass
+
+@dataclass
+class Student:
+    id: int
+    name: str
+    gpa: float
+
+s = Student(66003, "Chai", 3.45)
+print(s.gpa)</pre></div>
+        <div class="codeblock"><pre># Python: dict
+s = {"id": 66003,
+     "name": "Chai",
+     "gpa": 3.45}
+print(s["gpa"])</pre></div>
+      </div>
+      <div class="prose">
+        <p>เมื่อนำเรคคอร์ดหลายตัวมาเก็บในอาร์เรย์ จะได้<b>อาร์เรย์ของเรคคอร์ด</b> ซึ่งก็คือตารางข้อมูล (หนึ่งเรคคอร์ด = หนึ่งแถว) ตำแหน่งของฟิลด์ใดก็ยังคำนวณได้ทันที</p>
+      </div>
+      <div class="callout" style="margin-block: 14px;"><span class="callout-k">สูตร</span><p class="mono"><b>Loc(A[i].field) = Base + i × size + offset</b><br><span class="small" style="font-family: var(--f-body);">size = ขนาดของเรคคอร์ด 1 ตัว · offset = ระยะจากต้นเรคคอร์ดถึงฟิลด์นั้น</span></p></div>
+      <figure class="bench" id="demo-record">
+        <figcaption class="bench-h"><span class="eyebrow">แอนิเมชัน 2.5</span><b>หาที่อยู่ของ students[i].field</b></figcaption>
+        <div class="bench-tools">
+          <label for="a4-i">เรคคอร์ดที่ i =</label>
+          <select id="a4-i"><option>0</option><option>1</option><option selected>2</option><option>3</option></select>
+          <label for="a4-f">ฟิลด์</label>
+          <select id="a4-f"><option value="id">id</option><option value="name">name</option><option value="gpa" selected>gpa</option></select>
+        </div>
+        <div class="stage" data-stage></div>
+        <div data-transport></div>
+      </figure>
+      <p class="small muted" style="max-width: 72ch;">ในเครื่องจริง คอมไพเลอร์อาจเติมช่องว่าง (padding) ระหว่างฟิลด์เพื่อให้ตรงขอบหน่วยความจำ ขนาดจริงของ struct จึงอาจมากกว่าผลรวมของฟิลด์ ตัวอย่างนี้เลือกฟิลด์ที่ไม่ต้องเติมช่องว่าง</p>
+      <div class="recap"><h4>สรุปหัวข้อ 2.5</h4><ul>
+        <li>เรคคอร์ด = ฟิลด์ต่างชนิดกัน เข้าถึงด้วยชื่อ · อาร์เรย์ = ชนิดเดียวกัน เข้าถึงด้วยดัชนี</li>
+        <li>อาร์เรย์ของเรคคอร์ดคือตารางข้อมูล: Loc = Base + i × size + offset</li>
+      </ul></div>
+    </section>
+
+    <!-- ---------- ใบงาน ---------- -->
+    <section class="lesson" id="u2-lab">
+      <div class="lesson-h"><span class="lesson-no">LAB</span><h2>ใบงานปฏิบัติ หน่วยที่ 2<span class="en">ภาษา Python · ปฏิบัติ 4 ชั่วโมง</span></h2></div>
+      <div class="prose" style="margin-bottom: 18px;">
+        <p>ทำใบงานเป็นกลุ่ม 2–3 คน ใบละประมาณ 1 ชั่วโมง บันทึกผลการรันและตอบคำถามท้ายใบงาน ส่งเป็นไฟล์ <code>.py</code> พร้อมภาพหน้าจอผลลัพธ์</p>
+      </div>
+      <div class="labs">
+        <details class="lab" open>
+          <summary><span class="lab-no">2.1</span><span class="lab-t">สร้างลิสต์ด้วยอาร์เรย์ขนาดคงที่<small>เขียน insert / delete / find เอง และนับจำนวนครั้งที่เลื่อนข้อมูล</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรมแล้วบันทึกค่า moves หลังแต่ละคำสั่ง เทียบกับแอนิเมชัน 2.4</li><li>เพิ่มเมธอด <code>get(i)</code> และ <code>set(i, x)</code> ที่ตรวจสอบดัชนี</li><li>คำถาม: แทรก 100 ค่าที่ตำแหน่ง 0 ทีละค่า กับแทรกที่ท้ายทีละค่า moves ต่างกันเท่าไร</li></ol>
+            <div class="codeblock"><pre>class ArrayList:
+    def __init__(self, capacity):
+        self.data = [None] * capacity
+        self.n = 0
+        self.moves = 0
+
+    def insert(self, k, x):
+        if self.n == len(self.data):
+            raise OverflowError("อาร์เรย์เต็ม")
+        if not 0 &lt;= k &lt;= self.n:
+            raise IndexError("ตำแหน่งไม่ถูกต้อง")
+        for j in range(self.n - 1, k - 1, -1):
+            self.data[j + 1] = self.data[j]
+            self.moves += 1
+        self.data[k] = x
+        self.n += 1
+
+    def delete(self, k):
+        if not 0 &lt;= k &lt; self.n:
+            raise IndexError("ตำแหน่งไม่ถูกต้อง")
+        x = self.data[k]
+        for j in range(k, self.n - 1):
+            self.data[j] = self.data[j + 1]
+            self.moves += 1
+        self.data[self.n - 1] = None
+        self.n -= 1
+        return x
+
+    def find(self, x):
+        for i in range(self.n):
+            if self.data[i] == x:
+                return i
+        return -1
+
+    def __str__(self):
+        return str(self.data[:self.n])
+
+
+L = ArrayList(8)
+for v in [10, 20, 30, 40, 50]:
+    L.insert(L.n, v)              # เพิ่มท้าย ไม่ต้องเลื่อน
+print(L, "moves =", L.moves)
+L.insert(0, 5)                    # แทรกหน้าสุด ต้องเลื่อน 5 ตัว
+print(L, "moves =", L.moves)
+print("ลบ", L.delete(2), "→", L, "moves =", L.moves)
+print("ค้นหา 40 อยู่ที่ตำแหน่ง", L.find(40))</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">2.2</span><span class="lab-t">พิสูจน์สูตรคำนวณตำแหน่งกับหน่วยความจำจริง<small>ใช้ ctypes สร้างอาร์เรย์แบบภาษา C แล้วอ่านค่าจากที่อยู่ที่คำนวณเอง</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรม ตรวจว่าทุกบรรทัดแสดง True (อ่านค่าจากที่อยู่ที่คำนวณได้ตรงกับ A[i])</li><li>เปลี่ยน <code>c_int</code> เป็น <code>c_double</code> และ <code>c_char</code> แล้วสังเกตค่า w และที่อยู่ที่เปลี่ยนไป</li><li>คำนวณ 3 ข้อในส่วนที่ 2 ด้วยมือก่อน แล้วรันโปรแกรมตรวจคำตอบ</li></ol>
+            <div class="codeblock"><pre>import ctypes
+
+def loc_1d(base, i, w, low=0):
+    return base + (i - low) * w
+
+def loc_row_major(base, i, j, n_cols, w):
+    return base + (i * n_cols + j) * w
+
+def loc_col_major(base, i, j, n_rows, w):
+    return base + (j * n_rows + i) * w
+
+# 1) ตรวจสูตร 1 มิติกับหน่วยความจำจริง
+A = (ctypes.c_int * 6)(15, 42, 7, 23, 56, 31)
+base = ctypes.addressof(A)
+w = ctypes.sizeof(ctypes.c_int)
+for i in range(6):
+    addr = loc_1d(base, i, w)
+    value = ctypes.c_int.from_address(addr).value   # อ่านค่าจากที่อยู่ที่คำนวณได้
+    print(f"A[{i}] ที่อยู่ {addr}  ค่า {value}  ตรงกับ A[i]: {value == A[i]}")
+
+# 2) ฝึกคำนวณ แล้วตรวจคำตอบ
+print(loc_1d(1000, 5, 2, low=1))          # ?
+print(loc_row_major(2000, 2, 1, 4, 4))    # ?
+print(loc_col_major(2000, 2, 1, 3, 4))    # ?</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">2.3</span><span class="lab-t">ตารางคะแนนด้วยอาร์เรย์ 2 มิติ<small>รวมคะแนนรายคน เฉลี่ยรายวิชา และเรียงข้อมูลแบบ Row-major / Column-major</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรม ตรวจว่าบรรทัดสุดท้ายแสดงค่าเดียวกัน 3 ค่า</li><li>เพิ่มการหาคนที่ได้คะแนนรวมสูงสุด และวิชาที่ค่าเฉลี่ยต่ำสุด</li><li>เขียนฟังก์ชันสลับแถวกับคอลัมน์ (transpose) แล้วแสดงผลเป็นตาราง</li></ol>
+            <div class="codeblock"><pre>scores = [            # แถว = นักเรียน, คอลัมน์ = วิชา
+    [78, 65, 90, 72],
+    [55, 80, 68, 91],
+    [88, 74, 59, 63],
+]
+rows, cols = len(scores), len(scores[0])
+
+for i in range(rows):
+    print(f"นักเรียนคนที่ {i + 1} รวม {sum(scores[i])}")
+
+for j in range(cols):
+    col_sum = 0
+    for i in range(rows):
+        col_sum += scores[i][j]
+    print(f"วิชาที่ {j + 1} เฉลี่ย {col_sum / rows:.2f}")
+
+row_major = [scores[i][j] for i in range(rows) for j in range(cols)]
+col_major = [scores[i][j] for j in range(cols) for i in range(rows)]
+print("row-major   :", row_major)
+print("column-major:", col_major)
+
+i, j = 2, 1
+print(scores[i][j], row_major[i * cols + j], col_major[j * rows + i])   # ต้องเท่ากันทั้ง 3 ค่า</pre></div>
+          </div>
+        </details>
+        <details class="lab">
+          <summary><span class="lab-no">2.4</span><span class="lab-t">อาร์เรย์ของเรคคอร์ดนักเรียน<small>ใช้ dataclass เก็บข้อมูล ค้นหาด้วยรหัส และเรียงตาม GPA</small></span><span class="lab-chev">›</span></summary>
+          <div class="lab-body">
+            <ol><li>รันโปรแกรมแล้วบันทึกผล</li><li>เพิ่มฟิลด์ <code>dept</code> (แผนก) แล้วแสดงค่าเฉลี่ย GPA แยกตามแผนก</li><li>คำถาม: ถ้าใช้ dict แทน dataclass แล้วพิมพ์ชื่อฟิลด์ผิด เช่น <code>s["gap"]</code> จะเกิดอะไรขึ้น ต่างจาก <code>s.gap</code> ของ dataclass อย่างไร</li></ol>
+            <div class="codeblock"><pre>from dataclasses import dataclass
+
+@dataclass
+class Student:
+    sid: str
+    name: str
+    gpa: float
+
+students = [
+    Student("66001", "Ann", 3.25),
+    Student("66002", "Beam", 2.80),
+    Student("66003", "Chai", 3.45),
+    Student("66004", "Dao", 3.90),
+]
+
+def find_by_id(records, sid):
+    for r in records:
+        if r.sid == sid:
+            return r
+    return None
+
+print(find_by_id(students, "66003"))
+print("GPA เฉลี่ย", round(sum(s.gpa for s in students) / len(students), 2))
+for s in sorted(students, key=lambda s: s.gpa, reverse=True):
+    print(f"{s.sid}  {s.name:&lt;5} {s.gpa:.2f}")
+
+# เรคคอร์ดแบบ dict ใช้งานคล้ายกัน แต่ไม่ตรวจชื่อฟิลด์ให้
+d = {"sid": "66005", "name": "Earn", "gpa": 3.10}
+print(d["name"], d["gpa"])</pre></div>
+          </div>
+        </details>
+      </div>
+      <h3 style="margin: 26px 0 12px;">เกณฑ์การประเมินใบงาน</h3>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>ประเด็น</th><th class="num">คะแนน</th><th>สิ่งที่ดู</th></tr></thead>
+          <tbody>
+            <tr><td>ความถูกต้องของโปรแกรม</td><td class="num">40</td><td>รันได้ ผลลัพธ์ถูกต้อง ตรวจดัชนีและกรณีผิดพลาด</td></tr>
+            <tr><td>การคำนวณตำแหน่ง</td><td class="num">20</td><td>แสดงวิธีคำนวณด้วยมือถูกต้อง ตรงกับผลจากโปรแกรม</td></tr>
+            <tr><td>การบันทึกและวิเคราะห์ผล</td><td class="num">20</td><td>ตารางผล คำตอบท้ายใบงาน การอธิบายด้วย Big-O</td></tr>
+            <tr><td>กิจนิสัย</td><td class="num">20</td><td>ความรับผิดชอบ ส่งตรงเวลา การทำงานเป็นทีม การสื่อสาร</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------- แบบทดสอบ ---------- -->
+    <section class="lesson" id="u2-quiz">
+      <div class="lesson-h"><span class="lesson-no">QUIZ</span><h2>แบบทดสอบท้ายหน่วยที่ 2<span class="en">11 ข้อ · ตอบแล้วเห็นเฉลยทันที · เกณฑ์ผ่าน 70%</span></h2></div>
+      <div id="quiz-u2"></div>
+      <div class="next-unit">
+        <div><p class="eyebrow">หน่วยถัดไป</p><h3>หน่วยที่ 3 ลิงค์ลิสต์</h3><p class="small muted">กำลังจัดทำ · สัปดาห์ที่ 3</p></div>
+        <a class="btn" href="#units">ดูหน่วยการเรียนทั้งหมด</a>
+      </div>
+    </section>
+
+  </div>
+  <footer class="wrap foot">
+    <a href="#unit-1">← หน่วยที่ 1</a>
+    <span>หน่วยที่ 2 · 31900-0005 โครงสร้างข้อมูลและอัลกอริทึม</span>
+    <a href="#home">กลับหน้าภาพรวมรายวิชา</a>
+  </footer>
+</main>
+
 <script src="js/core.js"></script>
 <script src="js/course-data.js"></script>
 <script src="js/home.js"></script>
 <script src="js/unit1.js"></script>
+<script src="js/unit2.js"></script>
 <script>DSA.initCopy(); DSA.initRouter();</script>
 </body>
 </html>
